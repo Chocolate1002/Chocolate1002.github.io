@@ -1,0 +1,175 @@
+---
+layout: post
+title:  "HTML5 阅读笔记"
+categories: jekyll update
+tags: html5
+---
+## doctype
+doctype的存在是用于验证器检验格式类型，一般不会影响到浏览器；
+在文档中加入doctype时，就相当于声明了使用标准模式，这不是发明doctype本意，只是为了达到特殊的目的在利用doctype；
+
+### 指定文档的字符编码
+    <meta charset="UTF-8"/>
+
+## 使用link链接样式表
+    <link rel="stylesheet" href="xxxx.css"/>
+
+## 给多内容添加相同链接
+    <a href="#">
+        <h1>标题</h1>
+        <p>段落</p>
+        <img/>
+    </a>
+
+## 使用type属性增强表单
+    <input type="number"/>
+    <input type="search"/>
+    <input type="range"/>
+    <input type="email"/>
+    <input type="data"/>
+    <input type="url"/>
+
+**说明**：不能认识新的type属性值的浏览器会自动将其识别为text；新增属性placeholder(占位符)
+
+## 在HTML5中元素的3种类型的标记
+ - **不允许写结束标记的元素**：br、hr、img、input、link、meta、area、base、col、command、embed、keygen、param、source、track、wbr
+ - **可以省略结束标记的元素**：tr、td、th、li、dt、dd、p、option、rt、rp、optgroup、colgroup、thead、tbody、tfoot
+ - **可以省略全部标记的元素**：html、head、body、colgroup、tbody
+
+## 具有布尔值的属性
+    <!--只写属性，不写属性值，代表属性值为true-->
+        <input type="checkbox" checked/>
+    <!--不写属性，代表属性值为false-->
+        <input type="checkbox"/>
+    <!--属性值=属性名，代表属性值为true-->
+        <input type="checkbox" checked="checked"/>
+    <!--属性值=空字符串，代表属性值为true-->
+        <input type="checkbox" checked=""/>
+
+**说明**：HTML5中，属性值两边既可以使用双引号，也可以使用单引号，还可以在没有特殊字符的情况下省略引号。
+
+## HTML5新增的结构元素
+    | 元素名称 | 说明 |
+    | ----- | ---- |
+    | header | 标记头部区域的内容 |
+    | footer | 标记脚步区域的内容 |
+    | section | web页面中的一块区域 |
+    | article | 独立的文章内容 |
+    | aside | 相关内容或者引文 |
+    | nav | 导航类辅助内容 |
+
+## HTML5新增功能元素
+**hgroup**元素:用于对整个页面或页面中一个内容区块的标题进行组合。例如：
+
+    <hgroup>...</hrgoup>
+
+在HTML4中表示为：
+
+    <div>....</div>
+
+**figure**元素：表示一段独立的流内容，一般表示文档主体流内容中的一个独立单元。使用**figcaption**元素组添加标题。
+
+    <figure>
+        <figcaption>标题</figcaption>
+        <p>内容</p>
+    </figure>
+
+HTML4中表示为：
+
+    <dl>
+        <h1>标题</h1>
+        <p>内容</p>
+    </dl>
+
+**video**元素：定义视频，比如电影片段或其他视频流。例如：
+
+    <video src="movie.ogg" controls>video元素</video>
+
+HTML4中表示为：
+
+    <object type="video/ogg" data="movie.ogv">
+        <param name="src" value="movie.ogv"/>
+    </object>
+
+**audio**元素：定义音频，例如音乐或其他音频流。例如：
+
+    <vaudio src="someaudio.wav">audio 元素</audio>
+
+HTML4中表示为：
+
+    <object type="application/ogg" data="someaudio.wav">
+        <param name="src" value="someaudio.wav"/>
+    </object>
+
+**embed**元素：用来插入各种多媒体，格式可以是MIDI、WAV、AIFF、AU、MP3等。例如：
+
+    <vaudio src="horse.wav"/>
+
+HTML4中表示为：
+
+    <object type="application/x-shockwave-flash" data="flash.swf">
+    </object>
+
+**mark**元素：主要用来在视觉上向用户呈现那些需要突出显示或者高亮显示的文字。mark元素比较典型的应用就是在搜索结果中向用户显示搜索关键字。例如：
+
+    <mark></mark>
+
+HTML4中表示为：
+
+    <span></span>
+
+**time**元素：表示时间或日期，也可以同时表示两者。例如：
+
+    <time></time>
+
+HTML4中表示为：
+
+    <span></span>
+
+**canvas**元素：表示图形，如图表和其他图像。这个元素本身没有行为，仅提供一张画布，但它把一个绘图API展现给用户端Javascript，以便脚本把想绘制的图形绘制到这张画布上。例如：
+
+    <canvas id="myCanvas" width="300" height="200"></canvas>
+
+**output**元素：表示不同类型的输出，比如脚本的输出。例如：
+
+    <output></output>
+
+HTML4中表示为：
+
+    <span></span>
+
+**source**元素：为媒介元素(比如\<video\>和\<audio\>)定义媒介资源。例如：
+
+    <source>
+
+HTML4中表示为：
+
+    <param>
+
+**menu**元素：表示菜单列表，当希望列出表单控件时使用该标签。例如：
+
+    <menu>
+        <li><input type="checkbox"/>Red</li>
+        <li><input type="checkbox"/>Blue</li>
+    </menu>
+
+在HTML4中menu元素不推荐使用。
+
+**ruby**元素：表示ruby注释(中文注音或字符).
+
+**rt**元素：表示字符(中文注音或字符)的解释或发音。
+
+**rp**元素：在ruby注释中使用，以定义不支持ruby元素的浏览器所显示的内容。
+
+**wbr**元素：表示软换行。br元素表示此处必须换行，而wbr元素是浏览器窗口或父级元素的宽度足够宽时(没必要换行时)不进行换行，而当宽度不够时，主动在此处进行换行。
+
+**details**元素：表示用户要求得到并且可以得到的细节信息，可以与summary元素配合使用。
+
+**sarmmary**元素：提供标题或图例。标题是可见的，用户单击标题时，会显示出细节信息。summary元素应该是details元素的第一个子元素。例如：
+
+    <details>
+        <summary>HTML5</summary>
+         For hhohdbuifbui fusbf fuifbaf hfosfs ufs ihne  ebu   baba  duf sdf fhi .
+    </details>
+
+**datalist**元素：表示可选数据的列表，配合input元素使用，可以制作出输入值的下拉列表。
