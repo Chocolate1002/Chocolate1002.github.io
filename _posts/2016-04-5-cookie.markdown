@@ -1,0 +1,17 @@
+---
+layout: post
+title:  "Cookie"
+categories: jekyll update
+tags: cookie
+---
+## cookie机制
+cookie技术是客户端的解决方案，是由服务器发送给客户端的特殊信息，以文本文件的方式存放在客户端，此后客户端每次发送请求都会携带cookie中的信息
+
+    客户端发送一个HTTP请求到服务器端，
+    服务器端接受请求后，发送一个包含set-cookie头部的HTTP响应到客户端，
+    客户端再次发送HTTP请求时，会携带cookie头部，
+    服务器端返回一个HTTP响应到客户端
+
+通讯过程图解如下：
+
+![cookie](/cookie.png)
