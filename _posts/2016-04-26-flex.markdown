@@ -1,0 +1,11 @@
+---
+layout: post
+title:  "初见Flex"
+categories: jekyll update
+tags: flex
+---
+## flex定义
+Flex是Flexible Box的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性.任何一个容器都可以设置为flex布局。
+
+## flex基本语法
+
