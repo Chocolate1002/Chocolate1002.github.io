@@ -26,7 +26,8 @@ Flex是Flexible Box的缩写，意为"弹性布局"，用来为盒状模型提�
 
 ### 1.流动布局
 采用flex布局的元素称为容器，它的子元素称为项目
-![flex布局](/img/flex.png)
+![flex布局](/img/flex.jpg)
+
 flex容器默认存在两根轴，主轴（main axis）和侧轴（cross axis）。项目默认沿主轴排列。
 
 ### 2.flex容器属性
@@ -175,5 +176,82 @@ align-self属性允许单个项目有与其他项目不一样的对齐方式，�
     }
 
 ## flex实例
+
+#### 1.响应式布局<br/>
+
+![](/img/responsive.jpg)
+
+html代码如下：
+
+    <body>
+    <div class="box">
+        <div class="item-header"></div>
+        <div class="item-content">
+            <div class="content-left"></div>
+            <div class="content-center"></div>
+            <div class="content-right"></div>
+        </div>
+        <div class="item-footer"></div>
+    </div>
+    </body>
+
+css代码
+
+    .box {
+        width: 100%;
+        min-height: 600px;
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+    }
+    .item-header, .item-footer {
+        width: 100%;
+        background-color: #cccccc;
+        flex: 0 0 100px;
+    }
+    .item-content {
+        display: flex;/*要使content的内容flex布局，则必须给容器content设置为容器*/
+        flex: 1 0 auto;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .content-left,
+    .content-right {
+        background-color: cornflowerblue;
+        flex-basis: 100px;
+    }
+    .item-content .content-center {
+        /*flex-grow: 0.5;*/
+        flex-basis: 100px;
+        background-color: palevioletred;
+    }
+
+#### 2.图片居中<br/>
+![](/img/img_center.jpg)
+
+html代码
+
+    <div class="img-box">
+        <img src="xxxxx.jpg">
+    </div>
+    <div class="img-box">
+        <img src="xxxxx.jpg">
+        图文居中
+    </div>
+
+css代码
+
+    .img-box {
+        width: 100px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .img-box {
+        width: 20px;
+    }
+
+**注意**：flex弹性布局，应当根据实际情况合理使用，可以写网页弹性布局，也可在盒子模型中局部使用，例如实现img标签水平垂直居中。
 
 参考文献：<a href='http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html' target='_black'>http://www.ruanyifeng.com/blog</a>
