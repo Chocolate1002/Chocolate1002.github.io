@@ -125,6 +125,7 @@ tags:
 
     $('#user_name').on('input',function(){
         //TODO
+        function fn(){}
     })
 
 注：1）使用oninput事件必须考虑浏览器兼容问题
@@ -134,3 +135,20 @@ tags:
 
    a）当脚本中改变value时，不会触发；
    b）从浏览器的自动下拉提示中选取时，不会触发。
+
+   解决oninput浏览器兼容问题
+
+    var input = document.getElementById('user_name');
+    //IE下使用IE专有方法onpropertychange
+    var ie = !!window.ActiveXObject;
+    if(ie){
+       input.onpropertychange = fn;
+    }else{
+       input.addEventListener("input",fn,false);
+    }
+    //或者对支持oninput的浏览器用oninput，其他浏览器（IE6/7/8）使用onpropertychange：
+    if('oninput' in input){
+        input.addEventListener("input",fn,false);
+    }else {
+        input.onpropertychange = fn;
+    }
