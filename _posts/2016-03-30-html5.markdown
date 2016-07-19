@@ -257,4 +257,87 @@ HTML4中表示为：
 
 支持document.charset的浏览器有IE、Safari、opera和chrome。Firefox支持document.Characterset.支持document.defaultCharset属性的浏览器有chrome、IE和Safari。
 
-**data-**：HTML5规定可以添加前缀data-的自定义属性。添加自定义属性后，可以通过元素的dataset属性来访问自定义的属性的值
+**data-**：HTML5规定可以添加前缀data-的自定义属性。添加自定义属性后，可以通过元素的dataset属性来访问自定义的属性的值.dataset属性是DOMStringMap的一个实例。也就是一个名值对的映射。
+
+    //HTML代码
+    <div id='myDiv' data-lang='zh-CN'></div>
+    //js代码
+    var div = document.getElementById('myDiv');
+    //获取自定义的属性
+    div.dataset; //{lang: 'zh-CN'}
+
+dataset获取自定义属性得到的值对中，属性名没有前缀data-。
+支持dataset属性的浏览器有IE11+、Safari9+、firefox、chrome和opera。
+
+### 插入标记
+
+**innerHTML属性**：在读模式下。innerHTML属性返回与调用元素的所有子节点（包括注释、元素和文本节点）对应的HTML标记。在写模式下，innerHTML元素会根据指定的值创建新的DOM树，然后用这个DOM树替换调用元素原有的所有子节点。
+
+    //HTML代码
+    <div id='myDiv'>
+        <p>This is a <strong>paragraph</strong> with a list following it.</p>
+        <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ul>
+    </div>
+    //获取div的innerHTML
+    var div = document.getElementById('myDiv');
+    div.innerHTML;
+    /*返回的字符串为：
+    <p>This is a <strong>paragraph</strong> with a list following it.</p>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    */
+    //修改div的所有子节点
+    div.innerHTML = 'Hello & Welcome,<b>"reader"</b>';
+    div.innerHTML; // Hello &amp Welcome,<b>"reader"</b>
+    div.innerHTML = "Hello & Welcome,<b>\"reader\"</b>";
+    div.innerHTML; // Hello &amp Welcome,<b>"reader"</b>
+
+不同浏览器使用innerHTML属性返回调用元素的所有子元素有所不同。IE和Opera会将所有标签转换为大写形式。而Safari、Chrome和Firefox则会按照原先文档中（或指定这些标签时）的格式返回HTML，包括空格和 缩进。
+使用innerHTML属性设置调用元素的子节点时，注意设置值字符串中特殊字符的转移。如果设置的字符串开头是一个“无作用于的元素”（在页面中看不到的元素），这个字符串会变成空字符串
+
+    div.innerHTML = '<script>alert('This is a test!');</script>';
+    div.innerHTML; // null
+
+**outerHTML属性**：在读模式下，该属性返回调用元素及所有的子节点的HTML标签。在写模式下，该元素根据指定的HTML字符串创建新的DOM子树，然后用这个DOM子树完全替换调用元素。
+
+    //HTML代码
+    <div id="content">
+        <p>This is a <strong>paragraph</strong></p>
+    </div>
+    //js代码
+    var div = document.getElementById('content');
+    div.outerHTML; //返回和HTML代码相同的内容，包括div标签
+    div.outerHTML = '<p>This is a paragraph!<p>';
+    //执行了outerHTML属性写入值，结果就是新创建的元素会取代DOM树中<div>元素。如同执行了下面这样的代码：
+    var p = document.createElement('p');
+    p.appendChild(document.createTextNode('This is a paragraph!'));
+    div.replaceChild(p,div);
+
+支持outerHTML属性的浏览器有IE4+、Safari4+、chrome和opera8+。
+
+**insertAdjacentHTML()方法**：该方法接收两个参数：插入位置和要插入的HTML文本。第一个参数必须是下列值之一：
+
+- **beforebegin**：在当前元素之前插入一个同辈元素；
+- **afterbegin**：在当前元素之后插入一个同辈元素；
+- **beforeend**：在当前元素之下插入一个新的子元素作为该元素的一个新的lastChild；
+- **afterend**：在当前元素之下插入一个新的子元素作为该元素的一个新的firstChild；
+
+      //作为前一个同辈元素插入
+      div.insertAdjacentHTML('beforebegin','<p>hello world</p>');
+      //作为后一个同辈元素插入
+      div.insetAdjacentHTML('afterbegin','<p>hello world</p>');
+      //作为新的lastChild插入
+      div.insertAdjacentHTML('beforeend','<p>hello world</p>');
+      //作为新的firstChild插入
+      div.insertAdjacentHTML('afterend','<p>hello world</p>');
+
+支持insertAdjacentHTML方法的浏览器有IE、Firefox8+、Safari、opera和chrome。
+
+**scrollIntoView()方法**：该方法可以再所有元素上调用，通过滚动浏览器窗口或某个容器元素，调用元素就可以出现在视口中。如果给该元素传入true作为参数，或者不传入参数，那么滚动窗口之后会让调用元素的顶部与视口顶部尽可能平齐。如果传入false作为参数。调用元素会尽可能全部出现在视口中，（可能的话，调用元素的底部会与视口）

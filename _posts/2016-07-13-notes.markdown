@@ -1,0 +1,136 @@
+---
+layout: post
+title:  "项目笔记"
+categories: jekyll update
+tags:
+---
+## 这，就是一个错题笔记
+
+### 一、页面布局
+![](/img/notes/layout.jpg)
+
+    body {
+        height: 100%;
+    }
+    .top {
+        width: 100%;
+        height: 60px;
+        position: absolute;//使元素脱离文本流，浮动
+        z-index: 100;
+    }
+    .top .logo {
+        display: inline-block;
+        width: 280px;
+        margin-left: 20px;
+    }
+    .top .top-nav {
+        display: inline-block;
+    }
+    .top .user {
+        float: right;
+    }
+    //.content {
+        //width: 100%;
+        //height: 100%;
+        //position: relative;
+    //}
+    .left-wrapper {
+        width: 300px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        margin-top: 60px;
+    }
+    .left-wrapper .list {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow-y: auto;
+    }
+    .right-wrapper {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 300px;
+        right: 0;
+        margin-top: 60px;
+        overflow-y: auto;
+        min-width: 600px;
+    }
+
+### 二、\<img\>元素下多余空白
+在使用DIV+CSS布局时，遇到<img>元素下多余空白
+![](/img/notes/img.jpg)
+
+解决方法：
+
+**1.将\<img\>转换为块级对象**
+
+即，对\<img\>元素设置display: block;
+
+**2.设置\<img\>的垂直对齐方式**
+
+即，设置\<img\>的vertical-align属性值为：“top,text-top,bottom,text-bottom,middle,sub”都可以解决多余空白bug。
+
+**3.设置父对象的字体大小为0**
+
+即，对\<img\>的父级元素设置font-size: 0;
+
+**4.设置\<img\>的浮动属性**
+
+即，对\<img\>元素设置float:left;
+
+注：对于\<img\>元素下多余空白的BUG，需要依据实际原因做相应处理，见招拆招。
+
+### 三、页面滚动一定距离后，显示置顶按钮
+    var $goTop = $('<a class="go-top icon-up" title=' + IOT.tr('回顶部') + '><span>' + IOT.tr('回顶部') + '</span></a>').on('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo(0, 0);
+                }).appendTo($('body'));
+
+    $(window).on('scroll', function (e) {
+        var scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollY > 100) {
+            $goTop.fadeIn();
+        } else {
+            $goTop.fadeOut();
+        }
+    });
+
+### 四、部分浏览器在中文输入法下回车输入英文不能触发keyup事件
+![](/img/notes/keyup.png)
+
+解决方法：
+1、将keyup事件绑定到body上而不是input标签上面
+
+    //DOM结构
+    <input type="text" name="user_name" id="user_name"  value="" required placeholder="请输入电话号码或者邮箱地址">
+
+    //js代码
+    var  phonePattern = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/,
+        emailPattern = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,
+        nameLength = $('#user_name').val().length;
+    $('body').keyup(function(){
+        var thiz = $('#user_name'), newLength = thiz.val().length, inputVal = thiz.val();
+        if(newLength !== nameLength){
+            nameLength = newLength;
+            //TODO
+        }
+    });
+
+2、将实时验证绑定为oninput事件
+
+    $('#user_name').on('input',function(){
+        //TODO
+    })
+
+注：1）使用oninput事件必须考虑浏览器兼容问题
+![](/img/notes/oninput.png)
+
+2） 以下两种情况不会触发oninput事件
+
+   a）当脚本中改变value时，不会触发；
+   b）从浏览器的自动下拉提示中选取时，不会触发。
