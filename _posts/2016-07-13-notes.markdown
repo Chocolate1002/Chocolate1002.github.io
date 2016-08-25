@@ -152,3 +152,34 @@ tags:
     }else {
         input.onpropertychange = fn;
     }
+
+### 五、监听浏览器页面放大或者缩小
+
+    function detectZoom(){ 
+        var ratio = 0,
+            screen = window.screen,
+            ua = navigator.userAgent.toLowerCase();
+        if (window.devicePixelRatio !== undefined) {
+          ratio = window.devicePixelRatio;
+        }else if (~ua.indexOf('msie')) {  
+            if (screen.deviceXDPI && screen.logicalXDPI) {
+                ratio = screen.deviceXDPI / screen.logicalXDPI;
+            }
+        }else if (window.outerWidth !== undefined && window.innerWidth !== undefined) {
+            ratio = window.outerWidth / window.innerWidth;
+        }
+        if (ratio){
+            ratio = Math.round(ratio * 100);
+        }
+        // return ratio;
+        $('.j_zoom').remove();
+        if(ratio > 100){
+            $('body').prepend('<div style="border-radius: 0;" class="alert-box alert header-alert j_zoom">页面被放大了，请按<strong> Ctrl+0 </strong>还原！</div>');
+        }else if(ratio < 100){
+            $('body').prepend('<div style="border-radius: 0;" class="alert-box alert header-alert  j_zoom">页面被缩小了，请按<strong> Ctrl+0 </strong>还原！</div>');
+        }
+    }
+    detectZoom();
+    window.onresize = function(){
+        detectZoom();
+    }
