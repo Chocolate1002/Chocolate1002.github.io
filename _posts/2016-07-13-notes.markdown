@@ -183,3 +183,14 @@ tags:
     window.onresize = function(){
         detectZoom();
     }
+
+### 六、没有定宽的块级元素水平居中
+1、加入\<table\>标签,利用table标签的长度自适应性---即不定义其长度也不默认父元素body的长度（table其长度根据其内文本长度决定），因此可以看做一个定宽度块元素，然后再利用定宽度块状居中的margin的方法，使其水平居中。
+
+第一步：为需要设置的居中的元素外面加入一个 table 标签 ( 包括 \<tbody\>、\<tr\>、\<td\> )。
+
+第二步：为这个 table 设置“左右 margin 居中”（这个和定宽块状元素的方法一样）。
+
+2、改变块级元素的 display 为 inline 类型（设置为 行内元素 显示），然后使用 text-align:center 来实现居中效果
+
+3、给父元素设置 float，然后给父元素设置 position:relative 和 left:50%，子元素设置 position:relative 和 left: -50% 来实现水平居中。
