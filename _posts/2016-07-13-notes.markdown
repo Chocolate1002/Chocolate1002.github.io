@@ -194,3 +194,18 @@ tags:
 2、改变块级元素的 display 为 inline 类型（设置为 行内元素 显示），然后使用 text-align:center 来实现居中效果
 
 3、给父元素设置 float，然后给父元素设置 position:relative 和 left:50%，子元素设置 position:relative 和 left: -50% 来实现水平居中。
+
+### 七、null和undefined的区别
+
+* undefined表示一个变量没有被声明，或者被声明了但没有被赋值（未初始化），一个没有传入实参的形参变量的值为undefined,如果一个函数什么都不返回,则该函数默认返回undefined；
+* null是一个表示“没有值”的值；
+* Javascript将未赋值的变量默认值设为undefined；
+* Javascript从来不会将变量设为null。它是用来让程序员表明某个用var声明的变量时没有值的；
+* undefined不是一个有效的JSON，而null是；
+* undefined的类型(typeof)是undefined；
+* null的类型(typeof)是object. ；
+* 它们都是基本类型；
+* 他们都是falsy (Boolean(undefined) ->// false, Boolean(null) ->// false)；
+* 你可以这样判断一个变量是否是undefined。typeof variable === "undefined"；
+* 你可以这样判断一个变量是否是null。variable === null；
+* 双等号比较时它们相等（null==undefined ->// true），但三等号比较时不相等（null===undefined ->// false）；
