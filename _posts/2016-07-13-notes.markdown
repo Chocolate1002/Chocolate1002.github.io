@@ -209,3 +209,16 @@ tags:
 * 你可以这样判断一个变量是否是undefined。typeof variable === "undefined"；
 * 你可以这样判断一个变量是否是null。variable === null；
 * 双等号比较时它们相等（null==undefined ->// true），但三等号比较时不相等（null===undefined ->// false）；
+
+### 八、获取地址栏参数
+
+    function getUrlParam(name){
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i'),
+            r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return (r[2]);
+        }else{
+            return null;
+        }
+    }
+    
