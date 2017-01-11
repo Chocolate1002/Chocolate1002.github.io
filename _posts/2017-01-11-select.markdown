@@ -1,0 +1,40 @@
+---
+layout: post
+title:  "模拟select"
+categories: jekyll update
+tags:
+---
+## 写在前面
+项目中经常用到select下拉选择框，但是实际情况是我们不仅仅用此来显示选择项，还伴随着一些事件交互。例如，点击选择项，异步请求数据并展示在页面。这时使用原生的select就存在很多局限，所以，我们就想到了模拟select下拉选择框。
+比较普遍的是使用ul无序列表来模拟。
+
+## 直接看代码
+
+    <div class="select-search">
+        <p class="search-title">请选择</p>
+        <ul id="selected">
+            <li data-value="1">北京</li>
+            <li data-value="2">上海</li>
+            <li data-value="3">南京</li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        $('.search-title').on('click', function () {
+            var thiz = $(this),
+                $ul = thiz.siblings('ul');
+            if ($ul.hasClass('flag')) {
+                $ul.removeClass('flag').slideUp();
+            } else {
+                $ul.addClass('flag').slideDown();
+            }
+        });
+        $('#selected').find('li').on('click',function(e){
+            var _this = $(this);
+            var devId = _this.data('value');
+            _this.parent().hide().removeClass('flag');
+            $('.search-title').html(_this.text());
+
+            //Do something
+        });
+    </script>

@@ -182,11 +182,15 @@
     > li {
         margin-bottom: 0;
     }
+    h2 {
+        display: inline-block;
+    }
 }
 
 .post-meta {
     font-size: $small-font-size;
     color: $grey-color;
+    float: right;
 }
 
 .post-link {
